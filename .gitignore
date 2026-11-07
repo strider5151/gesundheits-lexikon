@@ -1,0 +1,10 @@
+# Private Rohdaten (Chat-Exporte, links.json, ergebnis.json, Sammler-ZIPs) – niemals ins öffentliche Repo
+werkzeug/privat/
+__pycache__/
+*.zip
+
+# Seit 08.11.2026 nicht mehr veröffentlichen (Urheberrecht) – nur privat in werkzeug/privat/offline_medien/
+/bilder/
+/thumbs/
+/transkripte/
+/tsuche.js

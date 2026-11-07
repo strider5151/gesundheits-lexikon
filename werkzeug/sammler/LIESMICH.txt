@@ -1,0 +1,55 @@
+LEXIKON-SAMMLER – Kurzanleitung
+================================
+
+Was macht das?
+  Holt zu allen 1.853 Links aus euren beiden WhatsApp-Gruppen
+  ("Gesundheit" und "Psychologie") die Daten fürs Lexikon:
+   - 961 YouTube-Videos + 70 TikToks: Titel, Kanal, Dauer, Sprache,
+     Beschreibung, Kapitel, Vorschaubild, Untertitel als Transkript
+   - 797 Webseiten: Titel, Beschreibung, Vorschaubild, kurzer Textauszug
+  Namen der Gruppenmitglieder sind in links.json nicht enthalten.
+
+So geht's
+  1. Doppelklick auf  test_20_links.bat
+       -> richtet beim ersten Mal alles ein (Python muss installiert sein)
+       -> testet mit 20 Links, dauert ca. 1 Minute
+  2. Klappt das: Doppelklick auf  start.bat
+       -> arbeitet alle Links ab (ca. 1–2 Stunden)
+       -> man kann jederzeit abbrechen (Fenster schließen oder Strg+C)
+          und später wieder start.bat – es geht dort weiter.
+  3. Am Ende entsteht hier eine Datei  lexikon_daten_DATUM.zip
+       -> diese ZIP bei Claude im Projekt hochladen.
+
+Optional: Transkripte für Videos ohne Untertitel (Spracherkennung)
+  - whisper_installieren.bat   (einmalig)
+  - nur_fehlende_transkripte.bat
+  Läuft lokal auf deinem PC, ohne Cloud. Auf einer normalen CPU dauert
+  das ungefähr so lange wie das Video selbst – also am besten über Nacht.
+  Mit Nvidia-Grafikkarte deutlich schneller.
+
+Wenn YouTube bremst ("rate-limited", "try again later", "Please sign in")
+  Das Skript erkennt das selbst: Es wartet 20 Minuten, versucht es nochmal
+  und überspringt YouTube sonst für diesen Lauf (Webseiten laufen weiter).
+  Gesperrte Videos werden NICHT als Fehler gespeichert – einfach später
+  (frühestens nach 1 Stunde) start.bat nochmal starten, dann werden genau
+  diese nachgeholt. Gelöschte/private Videos werden nicht erneut versucht.
+
+Wenn YouTube dauerhaft blockiert
+  In einem Eingabefenster in diesem Ordner:
+     start.bat --cookies chrome      (oder edge / firefox)
+  Dann nutzt das Skript deine normale YouTube-Anmeldung aus dem Browser.
+  Bei Chrome/Edge vorher den Browser ganz schließen.
+
+Weitere Optionen
+  start.bat --nur youtube        nur YouTube
+  start.bat --nur web            nur Webseiten
+  start.bat --neu                fehlgeschlagene Links nochmal versuchen
+  start.bat --pause-yt 8         YouTube langsamer abfragen (Standard 4 s)
+  start.bat --sperre-min 30      bei Sperre länger warten (Standard 20 min)
+  start.bat --zip                nur die ZIP neu bauen
+
+Ordner "ausgabe"
+  ergebnis.json   alle gesammelten Daten
+  thumbs\         Vorschaubilder
+  transkripte\    Transkripte mit Zeitmarken (JSON)
+  fehler.log      was nicht geklappt hat (gelöschte/private Videos u. ä.)
